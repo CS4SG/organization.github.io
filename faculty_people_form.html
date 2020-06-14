@@ -200,7 +200,24 @@
       <div><input type="text" id="name" placeholder="Enter full name" required="required"/></div>
 
       <div><input type="text" id="designation" placeholder="Enter your designation or title" required="required"/></div>
+
+    <div>
+        <select id="status">
+            <option selected value="">-- Select your current Status --</option>
+            <option value="active">Active</option>
+            <option value="alumni">Alumni</option>
+        </select>
+    </div>
+
       <div><input type="text" id="link" placeholder="Enter your UB-directory page link" required="required"/></div>
+    <div>
+        <select id="images" onchange="location = this.value;">
+            <option selected value="">-- Select a method to upload your image --</option>
+            <option value="javascript:upload_link()">Enter Image URL</option>
+            <option value="javascript:upload_image()">Upload Image</option>
+        </select>
+    </div>
+    <div id="image_area"></div>
 
     <br><br>
     <div style="padding: 12px; font: 17px Calibri; width: 100%; border: 1px solid #ccc; border-radius: 4px;">
@@ -210,16 +227,6 @@
       <div><input type="text" id="website" placeholder="Enter your Website URL" /></div>
       <div><input type="text" id="email" placeholder="Enter your Email" /></div>
     </div>
-
-      <div>
-          <select id="images" onchange="location = this.value;">
-              <option selected value="">-- Select a method to upload your image --</option>
-              <option value="javascript:upload_link()">Enter Image URL</option>
-              <option value="javascript:upload_image()">Upload Image</option>
-          </select>
-      </div>
-      <div id="image_area"></div>
-
 
         <center>
         <div>
@@ -238,12 +245,19 @@
     	const name = document.getElementById('name').value;
       const designation = document.getElementById('designation').value;
       const link = document.getElementById('link').value;
+      const status = document.getElementById('status').value;
       var img_link = ""
       if (document.getElementById('img_link') != null){
         img_link = '<img src="'+String(document.getElementById('img_link').value)+'" class="team_picture" />'
       }
       else{
-        img_link = '<img src="'+localStorage.getItem("image_data")+'" class="team_picture" />'
+        if(localStorage.getItem("image_data") != null){
+          img_link = '<img src="'+localStorage.getItem("image_data")+'" class="team_picture" />'
+          window.localStorage.clear();
+        }
+        else{
+          img_link = '<img src="assets/img/team/default.png" class="team_picture" />'
+        }
       }
 
       // -----Handle social media links-----
@@ -273,6 +287,7 @@
             "layout: people"+"\n"+
             "name: "+name+"\n"+
             "designation: "+designation+"\n"+
+            "status: "+status+"\n"+
             "link: "+link+"\n"+
             "image: "+img_link+"\n"+
             "social: "+s+"\n"+
