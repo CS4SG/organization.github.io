@@ -8,6 +8,7 @@
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cs4sg.github.io/assets/vendor/icofont/icofont.min.css">
   
   <title>Generate Research Page</title>
   <meta content="" name="descriptison">
@@ -108,6 +109,41 @@
   .hiddenCB input[type="checkbox"]:checked+label:hover{
     background: #67b0d1;
   }
+
+
+  .inputWithIcon input[type="text"] {
+    padding-left: 40px;
+  }
+
+  .inputWithIcon {
+    position: relative;
+  }
+
+  .inputWithIcon i {
+    position: absolute;
+    left: 0;
+    top: 8px;
+    padding: 9px 8px;
+    color: #aaa;
+    transition: 0.3s;
+  }
+
+  .inputWithIcon input[type="text"]:focus + i {
+    color: dodgerBlue;
+  }
+
+  .inputWithIcon.inputIconBg i {
+    background-color: #aaa;
+    color: #fff;
+    padding: 9px 4px;
+    border-radius: 4px 0 0 4px;
+  }
+
+  .inputWithIcon.inputIconBg input[type="text"]:focus + i {
+    color: #fff;
+    background-color: dodgerBlue;
+  }
+
 </style>
 
   <!-- =======================================================
@@ -166,10 +202,14 @@
       <div><input type="text" id="designation" placeholder="Enter your designation or title" required="required"/></div>
       <div><input type="text" id="link" placeholder="Enter your UB-directory page link" required="required"/></div>
 
+    <br><br>
+    <div style="padding: 12px; font: 17px Calibri; width: 100%; border: 1px solid #ccc; border-radius: 4px;">
+       <center><h3><i class="icofont-linkedin"></i> &nbsp; <i class="icofont-web"></i> &nbsp; <u>Social Links</u> &nbsp; <i class="icofont-twitter"></i> &nbsp; <i class="icofont-email"></i><h3></center>
       <div><input type="text" id="linkedin" placeholder="Enter your LinkedIn profile URL" /></div>
       <div><input type="text" id="twitter" placeholder="Enter your Twitter profile URL" /></div>
       <div><input type="text" id="website" placeholder="Enter your Website URL" /></div>
       <div><input type="text" id="email" placeholder="Enter your Email" /></div>
+    </div>
 
       <div>
           <select id="images" onchange="location = this.value;">
