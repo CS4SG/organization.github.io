@@ -199,7 +199,17 @@
 
       <div><input type="text" id="name" placeholder="Enter full name" required="required"/></div>
 
-      <div><input type="text" id="designation" placeholder="Enter your designation or title" required="required"/></div>
+      <div><input type="text" id="designation" placeholder="Enter your designation or title and department" required="required"/></div>
+
+      <div style="padding: 12px; font: 17px Calibri; width: 100%; border: 1px solid #ccc; border-radius: 4px;"><center><h3>Enter Degrees</h3></center>
+      <div><input type="text" id="degrees" placeholder="Enter degrees held" /><input type="button" value="Add another degree" onclick="save_degree()"></div>
+      <ul id="degrees_added"><LH>Added Degrees:</LH></ul><font color="red">*</font>Click on a degree to remove it.</div>
+
+<br/>
+      <div style="padding: 12px; font: 17px Calibri; width: 100%; border: 1px solid #ccc; border-radius: 4px;"><center><h3>Enter Courses taught</h3></center>
+      <div><input type="text" id="courses" placeholder="Enter courses taught" /><input type="button" value="Add another course" onclick="save_courses()"></div>
+      <ul id="courses_added"><LH>Added Courses:</LH></ul><font color="red">*</font>Click on a course to remove it.</div>
+
 
     <div>
         <select id="status">
@@ -236,9 +246,8 @@
     </div>
   </div>
 <script>
-  
-  
-  var link_str = ""
+  var degrees_str = ""
+  var courses_str = ""
     let saveFile = () => {
     	
         // Get the data from each element on the form.
@@ -279,14 +288,19 @@
           s = s.concat('<a href="'+social_dict[k]+'" target="_blank"><i class="icofont-email"></i></a>')
         }
       }
-      console.log(s)
 
+      save_degree()
+      save_courses()
+      const degrees = degrees_str.slice(2)
+      const courses = courses_str.slice(2)
         // This variable stores all the data.
         let data = 
             "---"+"\n"+
             "layout: people"+"\n"+
             "name: "+name+"\n"+
             "designation: "+designation+"\n"+
+            "degrees: "+degrees+"\n"+
+            "courses: "+courses + "\n"+
             "status: "+status+"\n"+
             "link: "+link+"\n"+
             "image: "+img_link+"\n"+
@@ -346,6 +360,37 @@
     if (obj[propName] === null || obj[propName] === undefined || obj[propName] === "") {
       delete obj[propName];
     }
+  }
+}
+
+
+function save_degree(){
+  s = document.getElementById("degrees").value;
+  if(s == ""){
+  }
+  else{
+    degrees_str = degrees_str.concat(", "+s);
+    var node = document.createElement("LI");
+    node.onclick = function() {this.parentNode.removeChild(this);};
+    var textnode = document.createTextNode(s);
+    node.appendChild(textnode);
+    document.getElementById("degrees_added").appendChild(node);
+    document.getElementById("degrees").value = "";
+  }
+}
+
+function save_courses(){
+  s = document.getElementById("courses").value;
+  if(s == ""){
+  }
+  else{
+    courses_str = courses_str.concat(", "+s);
+    var node = document.createElement("LI");
+    node.onclick = function() {this.parentNode.removeChild(this);};
+    var textnode = document.createTextNode(s);
+    node.appendChild(textnode);
+    document.getElementById("courses_added").appendChild(node);
+    document.getElementById("courses").value = "";
   }
 }
 </script>
