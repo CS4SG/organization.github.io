@@ -261,7 +261,7 @@
       }
       else{
         if(localStorage.getItem("image_data") != null){
-          img_link = '<img src="'+localStorage.getItem("image_data")+'" class="team_picture" />'
+          img_link = localStorage.getItem("image_data")
           window.localStorage.clear();
         }
         else{
