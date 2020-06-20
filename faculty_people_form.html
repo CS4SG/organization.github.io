@@ -257,7 +257,7 @@
       const status = document.getElementById('status').value;
       var img_link = ""
       if (document.getElementById('img_link') != null){
-        img_link = '<img src="'+String(document.getElementById('img_link').value)+'" class="team_picture" />'
+        img_link = String(document.getElementById('img_link').value)
       }
       else{
         if(localStorage.getItem("image_data") != null){
@@ -265,7 +265,7 @@
           window.localStorage.clear();
         }
         else{
-          img_link = '<img src="assets/img/team/default.png" class="team_picture" />'
+          img_link = "assets/img/team/default.png"
         }
       }
 
