@@ -309,7 +309,7 @@
     return array.filter((a, b) => array.indexOf(a) === b)
   };
 
-  var people = tagger('a,b,d,f', 'peoples', "v")
+  var people = tagger(localStorage.getItem("people_string"), 'peoples', "v")
   people
 
 </script>
