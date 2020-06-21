@@ -168,7 +168,16 @@
 
       <div><input type="text" id="topic" placeholder="Enter Title" required="required"/></div>
       
-      <div><input type="text" id="authors" placeholder="Enter Authors" /></div>
+        <br><br>
+        <div style="padding: 12px; font: 17px Calibri; width: 100%; border: 1px solid #ccc; border-radius: 4px;">
+        <center><b>Choose Authors related to this Project<b></center><div id="peoples" class="hiddenCB"></div><input type="text" id="new_person" placeholder="Enter a new Person" style="width:50%"> &nbsp; <input type="button" onclick="add_new();" value="Add Person" style="width:10%"> &nbsp; OR  &nbsp;
+        <select onchange="location = this.value;" style="width:30%;">
+            <option selected value="">-- Add to Organization --</option>
+            <option value="javascript:window.open('https://cs4sg.github.io/organization.github.io/faculty_people_form.html', '_blank');">Add a Faculty</option>
+            <option value="javascript:window.open('https://cs4sg.github.io/organization.github.io/student_people_form.html', '_blank');">Add a Student</option>
+        </select><br />
+        <ul id="new_people_added" style="font-weight: normal;"><LH><b>Added non-organization Authors:</b></LH></ul>
+        </div><br><br>
       
       <div><input type="text" id="publishers" placeholder="Published in"  /></div>
       
@@ -212,7 +221,6 @@
         const publishers = document.getElementById("publishers").value
         const dates = document.getElementById("dts").value
         const abstract = document.getElementById("abstract").value
-        const tagged = checked.toString();
         save_link()
         const links = link_str.slice(2)
         var msg = String(localStorage.getItem("saved_research_html"));
@@ -222,11 +230,11 @@
             "---"+"\n"+
             "layout: publication"+"\n"+
             "title: "+topic+"\n"+
-            "authors: "+authors+"\n"+
+            "authors: "+people.toString()+"\n"+
             "publishers: "+publishers+"\n"+
             "date: "+dates+"\n"+
             "links: "+links+"\n"+
-            "tagged_projects: "+tagged+"\n"+
+            "tagged_projects: "+res_topics.toString()+"\n"+
             "abstract: "+abstract.replace(/\n/g, '<br />')+"\n"+"---"+"\n\n"+msg
 
 
@@ -269,26 +277,23 @@
       }
     }
 
+  var res_topics = tagger(localStorage.getItem("title_string"), 'tagged', "t");
+  var people = tagger(localStorage.getItem("people_string"), 'peoples', "v");
 
-    // tagged projects javascript
-//     $.getJSON("tags.json", function (data){
-//       localStorage.setItem("tagger", data);
-//     });
-    var t = localStorage.getItem("title_string")
-    var arr = t.split(",")
-
-    var checked = []
-
+  function tagger(t, inside, samp_func){
+    var people_checked = []
+    var people_arr = t.split(",")
+    
     var i=0;
-    function add(ids){     
-            i++;  
-            var node = document.createElement('div');        
-            node.innerHTML = '<input type="checkbox" id="' + ids + '" onChange="valueChange(this)" name="check' + i + '"><label for="' + ids + '">'+ ids +'</label>&nbsp; &nbsp;';       
-            document.getElementById('tagged').appendChild(node);    
+    function add(ids, parent){
+      i++;
+      var node = document.createElement('div');        
+      node.innerHTML = '<input type="checkbox" id="' + ids + '" onChange="'+samp_func+'(this)" name="check' + i + '"><label for="' + ids + '">'+ ids +'</label>&nbsp; &nbsp;';
+      document.getElementById(parent).appendChild(node);
     }
 
-    for (e of arr) {
-      add(e)
+    for (e of people_arr) {
+      add(e, inside)
     }
 
     function remove(array, element) {
@@ -296,23 +301,40 @@
       array.splice(index, 1);
     }
 
-    function valueChange(item){
-      if(checked.includes(item.id)){
-        remove(checked,item)
+    window[samp_func] = function(item){
+      if(people_checked.includes(item.id)){
+        remove(people_checked,item)
       }
       else{
-        checked.push(String(item.id))
+        people_checked.push(String(item.id))
       }
-      console.log(checked)
+      console.log(people_checked)
     }
+    return people_checked
+  }
 
-    function add_tag(){
+  function add_new(){
+    var n = document.getElementById("new_person").value
+    if(n != ""){
+      people.push(n);
+        var node = document.createElement("li");
+        node.onclick = function() {this.parentNode.removeChild(this);};
+        var textnode = document.createTextNode(n);
+        node.appendChild(textnode);
+        document.getElementById("new_people_added").appendChild(node);
+      document.getElementById("new_person").value = "";
+    }
+    else{
+
+    }
+  }
+
+  function add_tag(){
       s2 = String(document.getElementById('topic').value)
-      if(arr.includes(s2)){
+      if(res_topics.includes(s2)){
       }
       else{
-        arr.push(s2);
-        add(s2)
+        res_topics.push(s2);
       }
     }
 </script>
