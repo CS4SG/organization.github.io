@@ -165,14 +165,10 @@
         </center>
       
       <iframe src="https://cs4sg.github.io/research.html" style="display:none;"></iframe>
-      <iframe src="https://cs4sg.github.io/people.html" style="display:none;"></iframe>
 
       <div><input type="text" id="topic" placeholder="Enter Title" required="required"/></div>
       
-    <br><br>
-    <div style="padding: 12px; font: 17px Calibri; width: 100%; border: 1px solid #ccc; border-radius: 4px;">
-      <center><b>Choose People to add<b></center><div id="people" class="hiddenCB"></div>
-    </div><br><br>
+      <div><input type="text" id="authors" placeholder="Enter Authors" /></div>
       
       <div><input type="text" id="publishers" placeholder="Enter publishers"  /></div>
       
@@ -212,7 +208,7 @@
     	
         // Get the data from each element on the form.
     	const topic = document.getElementById('topic').value;
-        const authors = checked2.toString();
+        const authors = document.getElementById("authors").value
         const publishers = document.getElementById("publishers").value
         const dates = document.getElementById("dts").value
         const abstract = document.getElementById("abstract").value
@@ -280,32 +276,19 @@
 //     });
     var t = localStorage.getItem("title_string")
     var arr = t.split(",")
+
     var checked = []
 
-    var p = localStorage.getItem("people_string")
-    var arr2 = p.split(",")
-    var checked2 = []
-
     var i=0;
-    function add(ids, inside){     
+    function add(ids){     
             i++;  
             var node = document.createElement('div');        
             node.innerHTML = '<input type="checkbox" id="' + ids + '" onChange="valueChange(this)" name="check' + i + '"><label for="' + ids + '">'+ ids +'</label>&nbsp; &nbsp;';       
-            document.getElementById(inside).appendChild(node);    
-    }
-
-    function add2(ids, inside){     
-        i++;  
-        var node = document.createElement('div');        
-        node.innerHTML = '<input type="checkbox" id="' + ids + '" onChange="valueChange2(this)" name="check' + i + '"><label for="' + ids + '">'+ ids +'</label>&nbsp; &nbsp;';       
-        document.getElementById(inside).appendChild(node);    
+            document.getElementById('tagged').appendChild(node);    
     }
 
     for (e of arr) {
-      add(e, 'tagged')
-    }
-    for (e of arr2) {
-      add2(e, 'people')
+      add(e)
     }
 
     function remove(array, element) {
@@ -321,16 +304,6 @@
         checked.push(String(item.id))
       }
       console.log(checked)
-    }
-
-    function valueChange2(item){
-      if(checked2.includes(item.id)){
-        remove(checked2,item)
-      }
-      else{
-        checked2.push(String(item.id))
-      }
-      console.log(checked2)
     }
 
     function add_tag(){
