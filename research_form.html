@@ -187,7 +187,8 @@
             <option selected value="">-- Add to Organization --</option>
             <option value="javascript:window.open('https://cs4sg.github.io/organization.github.io/faculty_people_form.html', '_blank');">Add a Faculty</option>
             <option value="javascript:window.open('https://cs4sg.github.io/organization.github.io/student_people_form.html', '_blank');">Add a Student</option>
-        </select>
+        </select><br />
+        <ul id="new_people_added" style="font-weight: normal;"><LH><b>Added non-organization People:</b></LH></ul>
         </div><br><br>
         
         <div><iframe src="edit.html" style="border:0px; width:100%; min-height:50vh;"></iframe></div>     
@@ -292,6 +293,11 @@
     var n = document.getElementById("new_person").value
     if(n != ""){
       people.push(n);
+        var node = document.createElement("li");
+        node.onclick = function() {this.parentNode.removeChild(this);};
+        var textnode = document.createTextNode(n);
+        node.appendChild(textnode);
+        document.getElementById("new_people_added").appendChild(node);
       document.getElementById("new_person").value = "";
     }
     else{
