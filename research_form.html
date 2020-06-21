@@ -211,6 +211,7 @@
         const subheading = document.getElementById('subheading').value;
         var msg = String(localStorage.getItem("saved_research_html"));
         add_new()
+        people = removeDuplicates(people)
         
         // This variable stores all the data.
         let data = 
@@ -304,7 +305,11 @@
 
     }
   }
-  var people = tagger(localStorage.getItem("people_string"), 'peoples', "v")
+  function removeDuplicates(array) {
+    return array.filter((a, b) => array.indexOf(a) === b)
+  };
+
+  var people = tagger('a,b,d,f', 'peoples', "v")
   people
 
 </script>
