@@ -155,6 +155,11 @@
     <iframe src="https://cs4sg.github.io/research.html" style="display:none;"></iframe>
     <div>
         <!--Add few elements to the form-->
+
+        <div>
+            <input type="text" id="title" placeholder="Enter Grant Title" required="required"/>
+        </div>
+
         <div>
             <input type="text" id="org_name" placeholder="Enter Organization Name" required="required"/>
         </div>
@@ -164,6 +169,11 @@
         <div>
             <input type="number" id="grants" placeholder="Enter Grant amount in USD" min="0.01" step="0.01" />
         </div>
+
+        <div>
+            <input type="date" id="valid" placeholder="Enter the estimated duration of grant" required="required"/>
+        </div>
+
             <br><br>
         <div style="padding: 12px; font: 17px Calibri; width: 100%; border: 1px solid #ccc; border-radius: 4px;">
         <center><b>Choose Tags<b></center><div id="tagged" class="hiddenCB"></div>
@@ -187,18 +197,22 @@ window.onload = function() {
     let saveFile = () => {
     	
         // Get the data from each element on the form.
+        const title = document.getElementById('title').value;
         const org_name = document.getElementById('org_name').value;
         const org_link = document.getElementById('org_link').value;
         const grants = document.getElementById('grants').value;
+        const duration = document.getElementById('valid').value
         const tagged = checked.toString();
         
         // This variable stores all the data.
         let data = 
             "---"+"\n"+
+            "grant_title: "+title+"\n"+
             "layout: default"+"\n"+
             "organization: "+org_name+"\n"+
             "org_link: "+org_link+"\n"+
             "grants: "+grants+"\n"+
+            "duration: "+duration+"\n"+
             "tagged_projects: "+tagged+"\n"+
             "---"
 
