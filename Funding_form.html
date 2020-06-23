@@ -180,6 +180,9 @@
         <div style="padding: 12px; font: 17px Calibri; width: 100%; border: 1px solid #ccc; border-radius: 4px;">
         <center><b>Choose Tags<b></center><div id="tagged" class="hiddenCB"></div>
     </div><br><br>
+
+      <div><iframe src="edit.html" style="border:0px; width:100%; min-height:50vh;"></iframe></div>
+
         <div>
         <center>
         <div>
@@ -205,6 +208,7 @@ window.onload = function() {
         const grants = document.getElementById('grants').value;
         const duration = document.getElementById('valid').value
         const tagged = checked.toString();
+        var msg = String(localStorage.getItem("saved_research_html"));
         
         // This variable stores all the data.
         let data = 
@@ -216,7 +220,7 @@ window.onload = function() {
             "grants: "+grants+"\n"+
             "duration: "+duration+"\n"+
             "tagged_projects: "+tagged+"\n"+
-            "---"
+            "---"+"\n\n"+msg
 
         
     // Convert the text to BLOB.
