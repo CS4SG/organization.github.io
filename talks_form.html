@@ -166,7 +166,17 @@
       <div><input type="text" id="topic" placeholder="Enter Talk Title" required="required"/></div>
 
       <br><br>
-      <div style="padding: 12px; font: 17px Calibri; width: 100%; border: 1px solid #ccc; border-radius: 4px;"><center><b>Choose Orator<b></center><div id="orator"></div></div>
+      <div style="padding: 12px; font: 17px Calibri; width: 100%; border: 1px solid #ccc; border-radius: 4px;"><center><b>Choose Orator<b></center><div id="orator"></div>
+      <input type="text" id="new_orator" placeholder="Enter a new Orator" style="width:50%"> &nbsp; <input type="button" onclick="add_new_orator();" value="Add Orator" style="width:10%"> &nbsp; OR  &nbsp;
+        <select onchange="location = this.value;" style="width:30%;">
+            <option selected value="">-- Add to Organization --</option>
+            <option value="javascript:window.open('https://cs4sg.github.io/organization.github.io/faculty_people_form.html', '_blank');">Add a Faculty</option>
+            <option value="javascript:window.open('https://cs4sg.github.io/organization.github.io/student_people_form.html', '_blank');">Add a Student</option>
+        </select><br />
+        <b>Added non-organization Orator:</b>
+        <label id="new_orator_added" style="font-weight: normal;"></label>
+
+      </div>
       
 
 
@@ -216,13 +226,17 @@
       const links = link_str.slice(2)
       add_new()
       var msg = String(localStorage.getItem("saved_research_html"));
+      var t = talker()
+      if(t === ""){
+        t = document.getElementById("new_orator").value
+      }
         
         // This variable stores all the data.
       let data = 
           "---"+"\n"+
           "layout: talk"+"\n"+
           "title: "+topic+"\n"+
-          "talk_by: "+talker()+"\n"+
+          "talk_by: "+t+"\n"+
           "authors: "+people.toString()+"\n"+
           "date: "+dates+"\n"+
           "tagged_projects: "+res_topics.toString()+"\n"+"\n"+"---"+"\n\n"+msg
@@ -327,6 +341,10 @@ function talker(){
     else{
 
     }
+  }
+
+  function add_new_orator(){
+    document.getElementById("new_orator_added").innerHTML = document.getElementById("new_orator").value
   }
 </script>
 
