@@ -373,15 +373,16 @@ function talker(){
       var textnode = document.createTextNode(fetched);
       node.appendChild(textnode);
       document.getElementById(listed).appendChild(node);
-      fetched = "";
     }
   }
 
   function psudo1(){
-    save_link(document.getElementById("vid_links").value,this.vid_links,"vid_link_status")
+    save_link(document.getElementById("vid_links").value,this.vid_links,"vid_link_status");
+    document.getElementById("vid_links").value = "";
   }
   function psudo2(){
     save_link(document.getElementById("slide_links").value,this.slide_links,"slide_link_status")
+    document.getElementById("slide_links").value = "";
   }
 </script>
 
