@@ -165,6 +165,15 @@
 
       <div><input type="text" id="topic" placeholder="Enter Talk Title" required="required"/></div>
 
+      <div style="padding: 12px; font: 17px Calibri; width: 100%; border: 1px solid #ccc; border-radius: 4px;"><div><input type="text" id="vid_links" placeholder="Enter related video links" /><input type="button" value="Add another link" onclick="psudo1()"></div>
+      <ul id="vid_link_status"><LH>Added Links:</LH></ul><font color="red">*</font>Click on a link to remove it.</div>
+      <br/>
+
+      <div style="padding: 12px; font: 17px Calibri; width: 100%; border: 1px solid #ccc; border-radius: 4px;"><div><input type="text" id="slide_links" placeholder="Enter related slides links" /><input type="button" value="Add another link" onclick="psudo2()"></div>
+      <ul id="slide_link_status"><LH>Added Links:</LH></ul><font color="red">*</font>Click on a link to remove it.</div>
+
+      <div><input type="text" id="locus" placeholder="Enter talk location" required="required"/></div>
+
       <br><br>
       <div style="padding: 12px; font: 17px Calibri; width: 100%; border: 1px solid #ccc; border-radius: 4px;"><center><b>Choose Orator<b></center><div id="orator"></div>
       <input type="text" id="new_orator" placeholder="Enter a new Orator" style="width:50%"> &nbsp; <input type="button" onclick="add_new_orator();" value="Add Orator" style="width:10%"> &nbsp; OR  &nbsp;
@@ -218,6 +227,8 @@
   
   
   var link_str = ""
+  var vid_links = ""
+  var slide_links = ""
     let saveFile = () => {
     	
         // Get the data from each element on the form.
@@ -230,12 +241,16 @@
       if(t === ""){
         t = document.getElementById("new_orator").value
       }
+      var locus = document.getElementById("locus").value
         
         // This variable stores all the data.
       let data = 
           "---"+"\n"+
           "layout: talk"+"\n"+
           "title: "+topic+"\n"+
+          "locus: "+locus+"\n"+
+          "vid_links: "+vid_links+"\n"+
+          "slide_links: "+slide_links+"\n"+
           "talk_by: "+t+"\n"+
           "authors: "+people.toString()+"\n"+
           "date: "+dates+"\n"+
@@ -345,6 +360,28 @@ function talker(){
 
   function add_new_orator(){
     document.getElementById("new_orator_added").innerHTML = document.getElementById("new_orator").value
+  }
+
+
+  function save_link(fetched, link_str, listed){
+    if(fetched == ""){
+    }
+    else{
+      link_str = link_str.concat(", "+fetched);
+      var node = document.createElement("LI");
+      node.onclick = function() {this.parentNode.removeChild(this);};
+      var textnode = document.createTextNode(fetched);
+      node.appendChild(textnode);
+      document.getElementById(listed).appendChild(node);
+      fetched = "";
+    }
+  }
+
+  function psudo1(){
+    save_link(document.getElementById("vid_links").value,this.vid_links,"vid_link_status")
+  }
+  function psudo2(){
+    save_link(document.getElementById("slide_links").value,this.slide_links,"slide_link_status")
   }
 </script>
 
