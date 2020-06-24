@@ -165,11 +165,11 @@
 
       <div><input type="text" id="topic" placeholder="Enter Talk Title" required="required"/></div>
 
-      <div style="padding: 12px; font: 17px Calibri; width: 100%; border: 1px solid #ccc; border-radius: 4px;"><div><input type="text" id="vid_links" placeholder="Enter related video links" /><input type="button" value="Add another link" onclick="psudo1()"></div>
+      <div style="padding: 12px; font: 17px Calibri; width: 100%; border: 1px solid #ccc; border-radius: 4px;"><div><input type="text" id="vid_links" placeholder="Enter related video links" /><input type="button" value="Add another link" onclick="save_vid_link()"></div>
       <ul id="vid_link_status"><LH>Added Links:</LH></ul><font color="red">*</font>Click on a link to remove it.</div>
       <br/>
 
-      <div style="padding: 12px; font: 17px Calibri; width: 100%; border: 1px solid #ccc; border-radius: 4px;"><div><input type="text" id="slide_links" placeholder="Enter related slides links" /><input type="button" value="Add another link" onclick="psudo2()"></div>
+      <div style="padding: 12px; font: 17px Calibri; width: 100%; border: 1px solid #ccc; border-radius: 4px;"><div><input type="text" id="slide_links" placeholder="Enter related slides links" /><input type="button" value="Add another link" onclick="save_slide_link()"></div>
       <ul id="slide_link_status"><LH>Added Links:</LH></ul><font color="red">*</font>Click on a link to remove it.</div>
 
       <div><input type="text" id="locus" placeholder="Enter talk location" required="required"/></div>
@@ -225,17 +225,19 @@
     }
   }
   
-  
-  var link_str = ""
-  var vid_links = ""
   var slide_links = ""
+  var vid_links = ""
+
     let saveFile = () => {
     	
         // Get the data from each element on the form.
     	const topic = document.getElementById('topic').value;
       var dates = document.getElementById("dts").value
-      const links = link_str.slice(2)
-      add_new()
+      save_vid_link()
+      save_slide_link()
+      const sli = slide_links.slice(1)
+      const vid = vid_links.slice(1)
+      
       var msg = String(localStorage.getItem("saved_research_html"));
       var t = talker()
       if(t === ""){
@@ -249,8 +251,8 @@
           "layout: talk"+"\n"+
           "title: "+topic+"\n"+
           "locus: "+locus+"\n"+
-          "vid_links: "+vid_links+"\n"+
-          "slide_links: "+slide_links+"\n"+
+          "vid_links: "+vid+"\n"+
+          "slide_links: "+sli+"\n"+
           "talk_by: "+t+"\n"+
           "authors: "+people.toString()+"\n"+
           "date: "+dates+"\n"+
@@ -363,26 +365,34 @@ function talker(){
   }
 
 
-  function save_link(fetched, link_str, listed){
+  function save_slide_link(){
+    var fetched = document.getElementById("slide_links").value
     if(fetched == ""){
     }
     else{
-      link_str = link_str.concat(", "+fetched);
+      slide_links = slide_links.concat(","+fetched);
       var node = document.createElement("LI");
       node.onclick = function() {this.parentNode.removeChild(this);};
       var textnode = document.createTextNode(fetched);
       node.appendChild(textnode);
-      document.getElementById(listed).appendChild(node);
+      document.getElementById("slide_link_status").appendChild(node);
+      document.getElementById("slide_links").value = "";
     }
   }
 
-  function psudo1(){
-    save_link(document.getElementById("vid_links").value,this.vid_links,"vid_link_status");
-    document.getElementById("vid_links").value = "";
-  }
-  function psudo2(){
-    save_link(document.getElementById("slide_links").value,this.slide_links,"slide_link_status")
-    document.getElementById("slide_links").value = "";
+  function save_vid_link(){
+    var fetched = document.getElementById("vid_links").value
+    if(fetched == ""){
+    }
+    else{
+      vid_links = vid_links.concat(","+fetched);
+      var node = document.createElement("LI");
+      node.onclick = function() {this.parentNode.removeChild(this);};
+      var textnode = document.createTextNode(fetched);
+      node.appendChild(textnode);
+      document.getElementById("vid_link_status").appendChild(node);
+      document.getElementById("vid_links").value = "";
+    }
   }
 </script>
 
