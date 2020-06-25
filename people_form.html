@@ -202,14 +202,15 @@
             <option selected value="">-- Select your Catagory --</option>
             <option value="internal faculty">Internal Faculty</option>
             <option value="external faculty">External Faculty</option>
-            <option value="student">Student</option>
+            <option value="internal student">Internal Student</option>
+            <option value="external student">External Student</option>
             <option value="collaborator">Collaborator</option>
         </select>
     </div>
 
       <div><input type="text" id="name" placeholder="Enter full name" required="required"/></div>
 
-      <div><input type="text" id="designation" placeholder="Enter your designation or title and department" required="required"/></div>
+      <div><input type="text" id="designation" placeholder="Enter your title and department (major, if you are a student)" required="required"/></div>
 
       <div style="padding: 12px; font: 17px Calibri; width: 100%; border: 1px solid #ccc; border-radius: 4px;"><center><h3>Enter Degrees</h3></center>
       <div><input type="text" id="degrees" placeholder="Enter degrees held" /><input type="button" value="Add another degree" onclick="save_degree()"></div>
