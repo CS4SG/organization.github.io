@@ -198,8 +198,8 @@
     </div>
 
     <div>
-        <select id="catagory">
-            <option selected value="">-- Select your Catagory --</option>
+        <select id="category">
+            <option selected value="">-- Select your Category --</option>
             <option value="UB faculty">UB Faculty</option>
             <option value="External collaborator">External Collaborator</option>
             <option value="Former student">Former Student</option>
@@ -207,9 +207,15 @@
         </select>
     </div>
 
-      <div><input type="text" id="name" placeholder="Enter full name" required="required"/></div>
+      <div>
+        <input type="text" id="fname" placeholder="Enter first name (can include middle name/initial after first if desired)" required="required"/>
+      </div>
+      
+      <div><input type="text" id="lname" placeholder="Enter last name" required="required"/></div>
 
-      <div><input type="text" id="designation" placeholder="Enter your title and department (major, if you are a student)" required="required"/></div>
+      <div>
+        <input type="text" id="designation" placeholder="Enter your title and department/major, e.g., Associate Professor, Computer Science // Student, Sociology // PhD Student, Social Work " required="required"/>
+      </div>
 
 <div style="display:none;">
       <div style="padding: 12px; font: 17px Calibri; width: 100%; border: 1px solid #ccc; border-radius: 4px;"><center><h3>Enter Degrees</h3></center>
@@ -230,7 +236,7 @@
         </select>
     </div>
 
-      <div><input type="text" id="link" placeholder="Enter your UB-directory page link" required="required"/></div>
+      <div><input type="text" id="link" placeholder="Enter your UB-directory page link. Should be https://www.buffalo.edu/people/UBITname" required="required"/></div>
     <div>
         <select id="images" onchange="location = this.value;">
             <option selected value="">-- Select a method to upload your image --</option>
@@ -262,11 +268,12 @@
     let saveFile = () => {
     	
         // Get the data from each element on the form.
-    	const name = document.getElementById('name').value;
+        const fname = document.getElementById('fname').value;
+      const lname = document.getElementById('lname').value;
       const designation = document.getElementById('designation').value;
       const link = document.getElementById('link').value;
       const status = document.getElementById('status').value;
-      const catagory = document.getElementById('catagory').value;
+      const category = document.getElementById('category').value;
       var img_link = ""
       if (document.getElementById('img_link') != null){
         img_link = String(document.getElementById('img_link').value)
@@ -309,20 +316,21 @@
         let data = 
             "---"+"\n"+
             "layout: people"+"\n"+
-            "name: "+name+"\n"+
-            "category: "+catagory+"\n"+
+            "name: "+fname+" "+lname+"\n"+
+            "category: "+category+"\n"+
             "designation: "+designation+"\n"+
-            "degrees: "+degrees+"\n"+
-            "courses: "+courses + "\n"+
+            //"degrees: "+degrees+"\n"+
+            //"courses: "+courses + "\n"+
             "status: "+status+"\n"+
             "link: "+link+"\n"+
             "image: "+img_link+"\n"+
             "social: "+s+"\n"+
+            "key: "+fname+" "+lname+"\n"+
             "---"+"\n\n"
         
         // Convert the text to BLOB.
         const textToBLOB = new Blob([data], { type: 'text/plain' });
-        const sFileName = name+'.md';	   // The file to save the data.
+        const sFileName = lname+" "+fname+'.md';	   // The file to save the data.
 
         let newLink = document.createElement("a");
         newLink.download = sFileName;
