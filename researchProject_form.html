@@ -152,8 +152,9 @@
 
 
 <!-- --------All content below this comment------- -->
-  
-  <div id = "after_submission">
+<center>
+<div style="width:90%;">
+<div id = "after_submission">
     
         <div class="section-title" data-aos="fade-in" data-aos-delay="100">
           <h2>Research Details Form</h2>
@@ -169,27 +170,19 @@
         <div>
             <input type="text" id="description" placeholder="Enter a brief description" required="required" />
         </div>
-        <div>
-            <input type="text" id="icon" placeholder="Enter Icon information" required="required" />
-            <br><font color="red">*</font>You can find icons at: <a href = "https://boxicons.com/">https://boxicons.com/</a>. Just copy and paste the icon information from the website. Example: <b>bx bxs-network-chart</b>
-        </div>
-        <center><br>
+        <center><hr/><br>
         <h3><b>Research Project</b></h3>
         </center>
         <div>
 
-        <div><input type="text" id="subheading" placeholder="Enter a brief Subheading"  required="required"/></div>
-
-        <br><br>
+        <br>
         <div style="padding: 12px; font: 17px Calibri; width: 100%; border: 1px solid #ccc; border-radius: 4px;">
         <center><b>Choose People related to this Project<b></center><div id="peoples" class="hiddenCB"></div><input type="text" id="new_person" placeholder="Enter a new Person" style="width:50%"> &nbsp; <input type="button" onclick="add_new();" value="Add Person" style="width:10%"> &nbsp; OR  &nbsp;
-        <select onchange="location = this.value;" style="width:30%;">
-            <option selected value="">-- Add to Organization --</option>
-            <option value="javascript:window.open('https://cs4sg.github.io/organization.github.io/faculty_people_form.html', '_blank');">Add a Faculty</option>
-            <option value="javascript:window.open('https://cs4sg.github.io/organization.github.io/student_people_form.html', '_blank');">Add a Student</option>
-        </select><br />
-        <ul id="new_people_added" style="font-weight: normal;"><LH><b>Added non-organization People:</b></LH></ul>
+        <input type="button" onclick="window.open('\/people_form.html')" value="Add to Organization"><br />
+        <ul id="new_people_added" style="font-weight: normal; text-align: left; padding-top: 10px;"><LH><b>Added external People:</b></LH></ul>
         </div><br><br>
+
+        <div><input type="text" id="subheading" placeholder="Enter a brief Subheading"  required="required"/></div>
         
         <div><iframe src="edit.html" style="border:0px; width:100%; min-height:50vh;"></iframe></div>     
       
@@ -201,13 +194,14 @@
     </div>
   </div>
 </form>
+</div>
+</center>
 <script>
     let saveFile = () => {
     	
         // Get the data from each element on the form.
     	const topic = document.getElementById('topic').value;
         const description = document.getElementById('description').value;
-        const icon = document.getElementById('icon').value;
         const subheading = document.getElementById('subheading').value;
         var msg = String(localStorage.getItem("saved_research_html"));
         add_new()
@@ -218,8 +212,8 @@
             "layout: research_project"+"\n"+
             "title: "+topic+"\n"+
             "description: "+description+"\n"+
-            "authors: "+people.toString()+"\n"+
-            "icon: <i class='"+icon+"' ></i>"+"\n"+
+            "tagged_people: "+people.toString()+"\n"+
+            "key: "+topic+"\n"+
             "---"+"\n\n"+
             "# "+subheading+"\n"+msg
 
