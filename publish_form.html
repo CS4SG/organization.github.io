@@ -305,7 +305,7 @@
   var res_topics = tagger(localStorage.getItem("title_string"), 'tagged', "t");
   var people = tagger(localStorage.getItem("people_list"), 'peoples', "v");
   var education = tagger(localStorage.getItem("education_string"), 'tag_edu', "e");
-  var courses = tagger(localStorage.getItem("course_string "), 'tag_courses', "c");
+  var courses = tagger(localStorage.getItem("course_string"), 'tag_courses', "c");
   
 
   var temporary = localStorage.getItem("people_list").split(",").map(i => '#' + i).join(",")
