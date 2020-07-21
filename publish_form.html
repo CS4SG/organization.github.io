@@ -290,10 +290,10 @@
     }
 
   var res_topics = tagger(localStorage.getItem("title_string"), 'tagged', "t");
-  var people = tagger(localStorage.getItem("people_string"), 'peoples', "v");
+  var people = tagger(localStorage.getItem("people_list"), 'peoples', "v");
   
 
-  var temporary = localStorage.getItem("people_string").split(",").map(i => '#' + i).join(",")
+  var temporary = localStorage.getItem("people_list").split(",").map(i => '#' + i).join(",")
   var tagged_people = tagger(temporary, 'tagged_people', "g");
 
   function tagger(t, inside, samp_func){
