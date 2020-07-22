@@ -2,13 +2,14 @@
 <html lang="en">
 
 <head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.5/lib/darkmode-js.min.js"></script>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   
-  <title>Funding Page</title>
+  <title>Generate Publication</title>
   <meta content="" name="descriptison">
   <meta content="" name="keywords">
 
@@ -38,21 +39,21 @@
             background-color: transparent;
             overflow: hidden;
         }
-    	input[type=text], input[type=number], input[type=date], textarea, select {
+    	input[type=text], textarea, select {
             font: 17px Calibri;
             width: 100%;
             padding: 12px;
             border: 1px solid #ccc;
             border-radius: 4px;
         }
-      input[type=url], textarea, select {
+      input[type=url], [type=datetime-local]{
             font: 17px Calibri;
             width: 100%;
             padding: 12px;
             border: 1px solid #ccc;
             border-radius: 4px;
         }
-        input[type=button]{ 
+        input[type=button], button{ 
             font: 17px Calibri;
             width: auto;
             float: center;
@@ -60,8 +61,16 @@
             padding: 7px;
         }
   </style>
-
-
+  
+  
+  <style>
+    iframe{
+        width: 100%;
+        border: 2px solid #ccc;
+    }
+</style>
+  
+  
 <style>
   label {
   padding: 4px 6px;
@@ -149,126 +158,160 @@
   <div id = "after_submission">
     
         <div class="section-title" data-aos="fade-in" data-aos-delay="100">
-          <h2>Funding Form</h2>
+          <h2>Talks Form</h2>
         </div>
-        
-    <iframe src="/people.html" style="display:none;"></iframe>
-    <iframe src="/research_project.html" style="display:none;"></iframe>
-    <div>
-        <!--Add few elements to the form-->
+      
+      <iframe src="https://cs4sg.github.io/research.html" style="display:none;"></iframe>
 
-        <div>
-            <input type="text" id="title" placeholder="Enter Grant Title" required="required"/>
-        </div>
+      <div><input type="text" id="topic" placeholder="Enter Talk Title" required="required"/></div>
 
-        <div>
-            <input type="text" id="org_name" placeholder="Enter Organization Name" required="required"/>
-        </div>
-        <div>
-            <input type="text" id="org_link" placeholder="Link to the organization's website" required="required" />
-        </div>
-        <div>
-          <input type="text" id="grant_notice" placeholder="Link to the Grant's Notice" required="required" />
+      <div style="padding: 12px; font: 17px Calibri; width: 100%; border: 1px solid #ccc; border-radius: 4px;"><div><input type="text" id="vid_links" placeholder="Enter related video links" /><input type="button" value="Add another link" onclick="save_vid_link()"></div>
+      <ul id="vid_link_status"><LH>Added Links:</LH></ul><font color="red">*</font>Click on a link to remove it.</div>
+      <br/>
+
+      <div style="padding: 12px; font: 17px Calibri; width: 100%; border: 1px solid #ccc; border-radius: 4px;"><div><input type="text" id="slide_links" placeholder="Enter related slides links" /><input type="button" value="Add another link" onclick="save_slide_link()"></div>
+      <ul id="slide_link_status"><LH>Added Links:</LH></ul><font color="red">*</font>Click on a link to remove it.</div>
+
+      <div><input type="text" id="locus" placeholder="Enter talk location" required="required"/></div>
+
+      <br><br>
+      <div style="padding: 12px; font: 17px Calibri; width: 100%; border: 1px solid #ccc; border-radius: 4px;"><center><b>Choose Orator<b></center><div id="orator"></div>
+      <input type="text" id="new_orator" placeholder="Enter a new Orator" style="width:50%"> &nbsp; <input type="button" onclick="add_new_orator();" value="Add Orator" style="width:10%"> &nbsp; OR  &nbsp;
+        <select onchange="location = this.value;" style="width:30%;">
+            <option selected value="">-- Add to Organization --</option>
+            <option value="javascript:window.open('https://cs4sg.github.io/organization.github.io/faculty_people_form.html', '_blank');">Add a Faculty</option>
+            <option value="javascript:window.open('https://cs4sg.github.io/organization.github.io/student_people_form.html', '_blank');">Add a Student</option>
+        </select><br />
+        <b>Added non-organization Orator:</b>
+        <label id="new_orator_added" style="font-weight: normal;"></label>
+
       </div>
-        <div>
-            <input type="number" id="grants" placeholder="Enter Grant amount in USD" min="0.01" step="0.01" />
-        </div>
+      
 
-        <div>
-            <input type="date" id="valid" placeholder="Enter grant start date" required="required"/><br/>
-          
-        </div>
 
-    <br><br>
+        <br><br>
         <div style="padding: 12px; font: 17px Calibri; width: 100%; border: 1px solid #ccc; border-radius: 4px;">
-        <center><b>Choose related research projects<b></center><div id="tagged" class="hiddenCB"></div>
-    </div><br>
-
-    <br>
+        <center><b>Choose related People<b></center><div id="peoples" class="hiddenCB"></div><input type="text" id="new_person" placeholder="Enter a new Person" style="width:50%"> &nbsp; <input type="button" onclick="add_new();" value="Add Person" style="width:10%"> &nbsp; OR  &nbsp;
+        <select onchange="location = this.value;" style="width:30%;">
+            <option selected value="">-- Add to Organization --</option>
+            <option value="javascript:window.open('https://cs4sg.github.io/organization.github.io/faculty_people_form.html', '_blank');">Add a Faculty</option>
+            <option value="javascript:window.open('https://cs4sg.github.io/organization.github.io/student_people_form.html', '_blank');">Add a Student</option>
+        </select><br />
+        <ul id="new_people_added" style="font-weight: normal;"><LH><b>Added non-organization Authors:</b></LH></ul>
+        </div><br><br>
+      
+      <div><input type="datetime-local" id="dts" placeholder="Enter date" /></div>
+      
+    <br><br>
     <div style="padding: 12px; font: 17px Calibri; width: 100%; border: 1px solid #ccc; border-radius: 4px;">
-    <center><b>Choose Related People<b></center><div id="peoples" class="hiddenCB"></div><input type="text" id="new_person" placeholder="Enter a new Person" style="width:50%"> &nbsp; 
-    <input type="button" onclick="add_new('new_person','people', 'new_people_added');" value="Add Person" style="width:10%"> &nbsp; OR  &nbsp;
-    <input type="button" onclick="window.open('\/people_form.html')" value="Add to Organization">
-    <br /><br />
-    <ul id="new_people_added" style="font-weight: normal; text-align: left;"><LH><b>Added non-organization Authors:</b></LH></ul>
-    </div><br>
-
+      <center><b>Choose related Projects<b></center><div id="tagged" class="hiddenCB"></div>
+    </div><br><br>
+      
       <div><iframe src="edit.html" style="border:0px; width:100%; min-height:50vh;"></iframe></div>
 
-        <div>
+
         <center>
         <div>
-            <input type="button" value="Generate MD File" onclick="saveFile(); after_submission();"/>
+            <input type="button" value="Generate MD File" onclick="saveFile(); after_submission()"/>
         </div>
         </center>
     </div>
   </div>
 <script>
-window.onload = function() {
-  if(!window.location.hash) {
-      window.location = window.location + '#loaded';
-      window.location.reload();
+  window.onload = function() {
+    if(!window.location.hash) {
+        window.location = window.location + '#loaded';
+        window.location.reload();
+    }
   }
-}
+  
+  var slide_links = ""
+  var vid_links = ""
 
     let saveFile = () => {
     	
         // Get the data from each element on the form.
-        const title = document.getElementById('title').value;
-        const org_name = document.getElementById('org_name').value;
-        const org_link = document.getElementById('org_link').value;
-        const grants = document.getElementById('grants').value;
-        const grant_notice = document.getElementById('grant_notice').value;
-        const duration = document.getElementById('valid').value
-        const start = document.getElementById('start').value
-        const tagged = res_topics.toString();
-        const tagged_people = people.toString();
-        var msg = String(localStorage.getItem("saved_research_html"));
+    	const topic = document.getElementById('topic').value;
+      var dates = document.getElementById("dts").value
+      save_vid_link()
+      save_slide_link()
+      const sli = slide_links.slice(1)
+      const vid = vid_links.slice(1)
+      
+      var msg = String(localStorage.getItem("saved_research_html"));
+      var t = talker()
+      if(t === ""){
+        t = document.getElementById("new_orator").value
+      }
+      var locus = document.getElementById("locus").value
         
         // This variable stores all the data.
-        let data = 
-            "---"+"\n"+
-            "grant_title: "+title+"\n"+
-            "layout: funds"+"\n"+
-            "organization: "+org_name+"\n"+
-            "org_link: "+org_link+"\n"+
-            "grant_notice: "+grant_notice+"\n"+
-            "grants: "+grants+"\n"+
-            "duration: "+duration+"\n"+
-            "start: "+start+"\n"+
-            "tagged_projects: "+tagged+"\n"+
-            "tagged_people: "+tagged_people+"\n"+
-            "key: "+title+"\n"+
-            "---"+"\n\n"+msg
+      let data = 
+          "---"+"\n"+
+          "layout: talk"+"\n"+
+          "title: "+topic+"\n"+
+          "locus: "+locus+"\n"+
+          "vid_links: "+vid+"\n"+
+          "slide_links: "+sli+"\n"+
+          "talk_by: "+t+"\n"+
+          "authors: "+people.toString()+"\n"+
+          "date: "+dates+"\n"+
+          "tagged_projects: "+res_topics.toString()+"\n"+"\n"+"---"+"\n\n"+msg
+
 
         
-    // Convert the text to BLOB.
-    const textToBLOB = new Blob([data], { type: 'text/plain' });
-    const sFileName = title+'.md';	   // The file to save the data.
+        // Convert the text to BLOB.
+        const textToBLOB = new Blob([data], { type: 'text/plain' });
+        const sFileName = topic+'.md';	   // The file to save the data.
 
-    let newLink = document.createElement("a");
-    newLink.download = sFileName;
+        let newLink = document.createElement("a");
+        newLink.download = sFileName;
 
-    if (window.webkitURL != null) {
-        newLink.href = window.webkitURL.createObjectURL(textToBLOB);
-    }
-    else {
-        newLink.href = window.URL.createObjectURL(textToBLOB);
-        newLink.style.display = "none";
-        document.body.appendChild(newLink);
-    }
+        if (window.webkitURL != null) {
+            newLink.href = window.webkitURL.createObjectURL(textToBLOB);
+        }
+        else {
+            newLink.href = window.URL.createObjectURL(textToBLOB);
+            newLink.style.display = "none";
+            document.body.appendChild(newLink);
+        }
 
-    newLink.click(); 
+        newLink.click(); 
     }
 
     function after_submission(){
-      document.getElementById("after_submission").innerHTML = "<br><br><center><table width='80%'><h2>Thank you for submitting the funding organization's details.</h2><br><br> To add it to the CS4SG Website, just upload the file to the <b>_funding<b> folder. Here is the link for the folder <br><a href = 'https://github.com/CS4SG/CS4SG.github.io/tree/master/_funding' target='_blank'>https://github.com/CS4SG/CS4SG.github.io/tree/master/_funding</a></table></center>"
+      document.getElementById("after_submission").innerHTML = "<br><br><center><table width='80%'><h2>Thank you for submitting your talks.</h2><br><br> To add it to the CS4SG Talks Section, just upload the file to the <b>_talks<b> folder. Here is the link for the folder <br><a href = 'https://github.com/CS4SG/CS4SG.github.io/tree/master/_talks' target='_blank'>https://github.com/CS4SG/CS4SG.github.io/tree/master/_talks</a></table></center>"
     }
 
-    var res_topics = tagger(localStorage.getItem("title_string"), 'tagged', "t");
-    var people = tagger(localStorage.getItem("people_list"), 'peoples', "v");
+  var p = localStorage.getItem("people_string")
+  var people_array = p.split(",")
+  function add_talk(ids){
+    var node = document.createElement('label');        
+      node.innerHTML = '<input type="radio" name="talkss" value="'+String(ids)+'" onchange="talker()">'+String(ids);
+      document.getElementById("orator").appendChild(node);
+  }
 
-    function tagger(t, inside, samp_func){
+  for (let e of people_array){
+    add_talk(e)
+  }
+
+function talker(){
+  var checked = ""
+  var radios = document.getElementsByName('talkss');
+
+  for (var i = 0, length = radios.length; i < length; i++) {
+    if (radios[i].checked) {
+      checked = radios[i].value
+      break;
+    }
+  }
+  return checked
+}
+
+  var res_topics = tagger(localStorage.getItem("title_string"), 'tagged', "t");
+  var people = tagger(p, 'peoples', "v");
+
+  function tagger(t, inside, samp_func){
     var people_checked = []
     var people_arr = t.split(",")
     
@@ -301,6 +344,56 @@ window.onload = function() {
     return people_checked
   }
 
+  function add_new(){
+    var n = document.getElementById("new_person").value
+    if(n != ""){
+      people.push(n);
+        var node = document.createElement("li");
+        node.onclick = function() {this.parentNode.removeChild(this);};
+        var textnode = document.createTextNode(n);
+        node.appendChild(textnode);
+        document.getElementById("new_people_added").appendChild(node);
+      document.getElementById("new_person").value = "";
+    }
+    else{
+
+    }
+  }
+
+  function add_new_orator(){
+    document.getElementById("new_orator_added").innerHTML = document.getElementById("new_orator").value
+  }
+
+
+  function save_slide_link(){
+    var fetched = document.getElementById("slide_links").value
+    if(fetched == ""){
+    }
+    else{
+      slide_links = slide_links.concat(","+fetched);
+      var node = document.createElement("LI");
+      node.onclick = function() {this.parentNode.removeChild(this);};
+      var textnode = document.createTextNode(fetched);
+      node.appendChild(textnode);
+      document.getElementById("slide_link_status").appendChild(node);
+      document.getElementById("slide_links").value = "";
+    }
+  }
+
+  function save_vid_link(){
+    var fetched = document.getElementById("vid_links").value
+    if(fetched == ""){
+    }
+    else{
+      vid_links = vid_links.concat(","+fetched);
+      var node = document.createElement("LI");
+      node.onclick = function() {this.parentNode.removeChild(this);};
+      var textnode = document.createTextNode(fetched);
+      node.appendChild(textnode);
+      document.getElementById("vid_link_status").appendChild(node);
+      document.getElementById("vid_links").value = "";
+    }
+  }
 </script>
 
 
