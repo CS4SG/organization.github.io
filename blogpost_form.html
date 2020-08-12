@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.5/lib/darkmode-js.min.js"></script>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+  <title>Generate Blog Post</title>
+  <meta content="" name="descriptison">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="https://ubacm.org/assets/ubacm.png" rel="icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/icofont/icofont.min.css" rel="stylesheet">
+  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="assets/vendor/venobox/venobox.css" rel="stylesheet">
+  <link href="assets/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="assets/css/style.css" rel="stylesheet">
+
+  <style>
+            * {
+            box-sizing: border-box;
+        }
+    	div {
+            padding: 10px;
+            background-color: transparent;
+            overflow: hidden;
+        }
+    	input[type=text], textarea, select {
+            font: 17px Calibri;
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+      input[type=url], [type=date]{
+            font: 17px Calibri;
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        input[type=button], button{ 
+            font: 17px Calibri;
+            width: auto;
+            float: center;
+            cursor: pointer;
+            padding: 7px;
+        }
+  </style>
+  
+  
+  <style>
+    iframe{
+        width: 100%;
+        border: 2px solid #ccc;
+    }
+</style>
+  
+  
+<style>
+  label {
+  padding: 4px 6px;
+  line-height: 190%;
+  outline-style: none;
+  transition: all .3s;
+  }
+
+  .hiddenCB div {
+    display: inline;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .hiddenCB input[type="checkbox"],
+  .hiddenCB input[type="radio"] {
+    display: none;
+
+  }
+
+  .hiddenCB label {
+
+    cursor: pointer;
+  }
+
+  .hiddenCB input[type="checkbox"]+label:hover{
+    background: #67b0d1;
+  }
+
+  .hiddenCB input[type="checkbox"]:checked+label {
+    background: #67b0d1;
+  }
+
+  .hiddenCB input[type="checkbox"]:checked+label:hover{
+    background: #67b0d1;
+  }
+</style>
+
+  <!-- =======================================================
+  * Template Name: Squadfree - v2.0.0
+  * Template URL: https://bootstrapmade.com/squadfree-free-bootstrap-template-creative/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body>
+
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top">
+    <div class="container d-flex">
+
+      <div class="logo mr-auto">
+        <!-- <h1 class="text-light"><a href="index.html"><span>Foster</span></a></h1> -->
+        <!-- Uncomment below if you prefer to use an image logo -->
+        <a href="\"><img src="assets/img/logo2.png" alt="" class="img-fluid"></a>
+      </div>
+
+      <nav class="nav-menu d-none d-lg-block">
+        <ul>
+          <li class="active"><a href="\">Home</a></li>
+          <li><a href="/#about">Education</a></li>
+          <li><a href="\research.html">Research</a></li>
+          <li><a href="/#testimonials">Speakers</a></li>
+          <li><a href="/#team">People</a></li>
+          <li><a href="/#news">About</a></li>
+
+
+          <li><a href="#contact">Join us</a></li>
+
+        </ul>
+      </nav><!-- .nav-menu -->
+
+    </div>
+  </header><!-- End Header -->
+
+<br><br><br>
+
+
+
+<!-- --------All content below this comment------- -->
+<center>
+  <div style="width:90%;">
+  <div id = "after_submission">
+    
+        <div class="section-title" data-aos="fade-in" data-aos-delay="100">
+          <h2>Blog Post Form</h2>
+        </div>
+      
+        <iframe src="/people.html" style="display:none;"></iframe>
+        <iframe src="/research_project.html" style="display:none;"></iframe>
+        <iframe src="/education.html" style="display:none;"></iframe>
+        <iframe src="/courses.html" style="display:none;"></iframe>
+        
+
+      <div><input type="text" id="topic" placeholder="Enter post title" required="required"/></div>
+      
+      <br>
+      <div style="padding: 12px; font: 17px Calibri; width: 100%; border: 1px solid #ccc; border-radius: 4px;">
+      <center><b>Choose Authors<b></center><div id="peoples" class="hiddenCB"></div><input type="text" id="new_person" placeholder="Enter a new Person" style="width:50%"> &nbsp; 
+      <input type="button" onclick="add_new('new_person','people', 'new_people_added');" value="Add Person" style="width:10%"> &nbsp; OR  &nbsp;
+      <input type="button" onclick="window.open('\/people_form.html')" value="Add to Organization">
+      <br /><br />
+      <ul id="new_people_added" style="font-weight: normal; text-align: left;"><LH><b>Added non-organization Authors:</b></LH></ul>
+      </div><br><br>
+    
+    <div style="padding: 12px; font: 17px Calibri; width: 100%; border: 1px solid #ccc; border-radius: 4px;">
+    <center><b>Featured Image (Optional)</b><center>
+      <br>
+      
+      <p style="text-align:left">If you would like to use your own featured image, please upload it to the assets/img/ folder in the main website and enter the image's filename below. If you don't include an image, a default one will be shown on the blog page and no image will be shown on the individual post's page.</p>
+
+      <div><input type="text" id="image" placeholder="Enter featured image filename e.g. sample.jpg"/></div>
+      
+      <p style="text-align:left">If using a featured image, please write a short (a few words) description below. This will only be shown if the photo is unable to load. </p>
+      <div><input type="text" id="imagedesc" placeholder="Enter description for featured image"/></div>
+    </div><br><br>
+    
+    <h3>Tags</h3>
+    <div style="padding: 12px; font: 17px Calibri; width: 100%; border: 1px solid #ccc; border-radius: 4px;">
+      <center><b>Choose Related People<b></center><div id="tagged_people" class="hiddenCB"></div><input type="text" id="tag_person" placeholder="Enter a new Person" style="width:50%"> &nbsp; 
+      <input type="button" onclick="add_new('tag_person','people', 'external_people');" value="Add Person" style="width:10%"> &nbsp; OR  &nbsp;
+      <input type="button" onclick="window.open('\/people_form.html')" value="Add to Organization">
+      <br /><br />
+      <ul id="external_people" style="font-weight: normal; text-align: left;"><LH><b>Added non-organization Authors:</b></LH></ul>
+    </div><br>
+    
+    <div style="padding: 12px; font: 17px Calibri; width: 100%; border: 1px solid #ccc; border-radius: 4px;">
+      <center><b>Choose Related Research Projects<b></center><div id="tagged" class="hiddenCB"></div>
+    </div><br>
+
+    <div style="padding: 12px; font: 17px Calibri; width: 100%; border: 1px solid #ccc; border-radius: 4px;">
+      <center><b>Choose Related Publications<b></center><div id="publish" class="hiddenCB"></div>
+    </div><br>
+
+    <div style="padding: 12px; font: 17px Calibri; width: 100%; border: 1px solid #ccc; border-radius: 4px;">
+      <center><b>Choose Related Education Items<b></center><div id="tag_edu" class="hiddenCB"></div>
+    </div><br>    
+
+    <div style="padding: 12px; font: 17px Calibri; width: 100%; border: 1px solid #ccc; border-radius: 4px;">
+      <center><b>Choose Related Courses<b></center><div id="tag_courses" class="hiddenCB"></div>
+    </div><br>  
+
+    <div style="padding: 12px; font: 17px Calibri; width: 100%; border: 1px solid #ccc; border-radius: 4px;">
+      <center><b>Choose Related Fundings<b></center><div id="funded" class="hiddenCB"></div>
+    </div><br>
+      
+    <div style="padding: 12px; font: 17px Calibri; width: 100%; border: 1px solid #ccc; border-radius: 4px;">  
+      <b>Post Content</b>
+      <p style="text-align:left">Write your blog post in the space below.</p>
+      <p style="text-align:left">By default, the excerpt that will be displayed on the blog page is the post's first paragraph. If you wish to customize the length of the excerpt, insert <code>&lt;!--end--&gt;</code> where you want the excerpt to end.<p>
+      <div><iframe src="edit.html" style="border:0px; width:100%; min-height:50vh;"></iframe></div>
+    </div><br>
+
+
+        <center>
+        <div>
+            <input type="button" value="Generate MD File" onclick="saveFile(); after_submission()"/>
+        </div>
+        </center>
+    </div>
+  </div>
+</div>
+</center>
+<script>
+  window.onload = function() {
+    if(!window.location.hash) {
+        window.location = window.location + '#loaded';
+        window.location.reload();
+    }
+  }
+  
+  
+  var link_str = ""
+    let saveFile = () => {
+    	
+        // Get the data from each element on the form.
+    	const topic = document.getElementById('topic').value;
+        const image = document.getElementById('image').value;
+        const imagedesc = document.getElementById('imagedesc').value;
+        save_link()
+        var msg = String(localStorage.getItem("saved_research_html"));
+        
+        // This variable stores all the data.
+        let data = 
+            "---"+"\n"+
+            "layout: post"+"\n"+
+            "title: "+topic+"\n"+
+            "authors: "+people.toString()+"\n"+
+            "image: "+"assets/img/"+image+"\n"+
+            "image_description: "+imagedesc+"\n"+
+            "excerpt_separator: <!--end-->"+"\n"+
+            "tagged_projects: "+res_topics.toString()+"\n"+
+            "tagged_people: "+tagged_people.map(i => i.substr(1)).join(",")+"\n"+
+            "tagged_publications: "+publications.toString()+"\n"+
+            "tagged_education: "+education.toString()+"\n"+
+            "tagged_courses: "+courses.toString()+"\n"+
+            "tagged_funding: "+funding.toString()+"\n"+
+            "key: "+topic+"\n"+
+            "description: "+msg+"\n"+"---"
+
+
+
+        // Convert the text to BLOB.
+        const textToBLOB = new Blob([data], { type: 'text/plain' });
+        const sFileName = topic+'.md';	   // The file to save the data.
+
+        let newLink = document.createElement("a");
+        newLink.download = sFileName;
+
+        if (window.webkitURL != null) {
+            newLink.href = window.webkitURL.createObjectURL(textToBLOB);
+        }
+        else {
+            newLink.href = window.URL.createObjectURL(textToBLOB);
+            newLink.style.display = "none";
+            document.body.appendChild(newLink);
+        }
+
+        newLink.click(); 
+    }
+
+    function after_submission(){
+      document.getElementById("after_submission").innerHTML = "<br><br><center><table width='80%'><h2>Thank you for submitting your blog post.</h2><br><br> To add it to the CS4SG Blog, just upload the file to the <b>_posts<b> folder. Here is the link for the folder <br><a href = 'https://github.com/CS4SG/CS4SG.github.io/tree/master/_posts' target='_blank'>https://github.com/CS4SG/CS4SG.github.io/tree/master/_posts</a></table></center>"
+    }
+
+    function save_link(){
+      s = document.getElementById("links").value;
+      if(s == ""){
+      }
+      else{
+        link_str = link_str.concat(", "+s);
+        var node = document.createElement("LI");
+        node.onclick = function() {this.parentNode.removeChild(this);};
+        var textnode = document.createTextNode(s);
+        node.appendChild(textnode);
+        document.getElementById("link_status").appendChild(node);
+        document.getElementById("links").value = "";
+      }
+    }
+
+  var res_topics = tagger(localStorage.getItem("title_string"), 'tagged', "t");
+  var people = tagger(localStorage.getItem("people_list"), 'peoples', "v");
+  var education = tagger(localStorage.getItem("education_string"), 'tag_edu', "edu");
+  var courses = tagger(localStorage.getItem("course_string"), 'tag_courses', "c");
+  var publications = tagger(localStorage.getItem("publication_string"), 'publish', "publ");
+  var funding = tagger(localStorage.getItem("fund_string"), 'funded', "funds");
+  
+
+  var temporary = localStorage.getItem("people_list").split(",").map(i => '#' + i).join(",")
+  var tagged_people = tagger(temporary, 'tagged_people', "g");
+
+  function tagger(t, inside, samp_func){
+    var people_checked = []
+    var people_arr = t.split(",")
+    
+    var i=0;
+    function add(ids, parent){
+      i++;
+      var node = document.createElement('div');        
+      node.innerHTML = '<input type="checkbox" id="' + ids + '" onChange="'+samp_func+'(this)" name="check' + i + '"><label for="' + ids + '">'+ ids +'</label>&nbsp; &nbsp;';
+      document.getElementById(parent).appendChild(node);
+    }
+
+    for (e of people_arr) {
+      add(e, inside)
+    }
+
+    function remove(array, element) {
+      const index = array.indexOf(element);
+      array.splice(index, 1);
+    }
+
+    window[samp_func] = function(item){
+      if(people_checked.includes(item.id)){
+        remove(people_checked,item)
+      }
+      else{
+        people_checked.push(String(item.id))
+      }
+      console.log(people_checked)
+    }
+    return people_checked
+  }
+
+  function add_new(id, list_name, ul_name){
+    var n = document.getElementById(id).value
+    if(n != ""){
+      eval(String(list_name)+".push('"+n+"')");
+        var node = document.createElement("li");
+        node.onclick = function() {this.parentNode.removeChild(this);};
+        var textnode = document.createTextNode(n);
+        node.appendChild(textnode);
+        document.getElementById(ul_name).appendChild(node);
+      document.getElementById(id).value = "";
+    }
+    else{
+
+    }
+  }
+
+  function add_tag(){
+      s2 = String(document.getElementById('topic').value)
+      if(res_topics.includes(s2)){
+      }
+      else{
+        res_topics.push(s2);
+      }
+    }
+</script>
+
+
+
+<!-- -------All content above this comment--------- -->
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/jquery/jquery.min.js"></script>
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/jquery.easing/jquery.easing.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+  <script src="assets/vendor/waypoints/jquery.waypoints.min.js"></script>
+  <script src="assets/vendor/counterup/counterup.min.js"></script>
+  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="assets/vendor/venobox/venobox.min.js"></script>
+  <script src="assets/vendor/owl.carousel/owl.carousel.min.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="assets/js/main.js"></script>
+
+</body>
+
+</html>
