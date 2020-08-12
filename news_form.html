@@ -221,7 +221,12 @@
 
     <br>
     <div style="padding: 12px; font: 17px Calibri; width: 100%; border: 1px solid #ccc; border-radius: 4px;">
-      <center><b>Choose Related Talks<b></center><div id="talks" class="hiddenCB"></div>
+      <center><b>Choose Related Internal Talks<b></center><div id="talks" class="hiddenCB"></div>
+    </div><br>
+
+    <br>
+    <div style="padding: 12px; font: 17px Calibri; width: 100%; border: 1px solid #ccc; border-radius: 4px;">
+      <center><b>Choose Related External Talks<b></center><div id="speech" class="hiddenCB"></div>
     </div><br>
     
     <br>
@@ -259,6 +264,7 @@
         var event_date = document.getElementById('event_date').value;
         var location = document.getElementById('location').value;
         var msg = String(localStorage.getItem("saved_research_html"));
+        var mixed_talks = talks.concat(speech)
         
         // This variable stores all the data.
         let data = 
@@ -275,7 +281,7 @@
             "tagged_education: "+education.toString()+"\n"+
             "tagged_courses: "+courses.toString()+"\n"+
             "tagged_funding: "+funding.toString()+"\n"+
-            "tagged_talks: "+talks.toString()+"\n"+
+            "tagged_talks: "+mixed_talks.toString()+"\n"+
             "key: "+topic+"\n"+
             "description: "+msg+"\n"+"---"
 
@@ -311,6 +317,7 @@
   var talks = tagger(localStorage.getItem("talk_string"), 'talks', "talk");
   var publications = tagger(localStorage.getItem("publication_string"), 'publish', "publ");
   var funding = tagger(localStorage.getItem("fund_string"), 'funded', "funds");
+  var speech = tagger(localStorage.getItem("speech_string"), 'speech', "speak");
   
 
   function tagger(t, inside, samp_func){
