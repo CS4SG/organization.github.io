@@ -152,7 +152,7 @@
 
 
 <!-- --------All content below this comment------- -->
-<iframe src="/people.html" style="display:none;"></iframe>
+<iframe src="/people.html" style="display:none;" id="sample"></iframe>
 <center>
 <div style="width:90%;">
 <div id = "after_submission">
@@ -305,9 +305,10 @@ window.onload = function() {
 
     }
   }
-  var session = sessionStorage.getItem("people_list")
-  console.log(session)
-  var people = tagger(session, 'peoples', "v")
+  
+  console.log(parent.title_string)
+  console.log(document.getElementById('iframeid').contentWindow['title_string']);
+  var people = tagger('p,q,r,s', 'peoples', "v")
 
 </script>
 
