@@ -305,8 +305,9 @@ window.onload = function() {
 
     }
   }
-
-  var people = tagger(sessionStorage.getItem("people_list"), 'peoples', "v")
+  var session = sessionStorage.getItem("people_list")
+  console.log(session)
+  var people = tagger(session, 'peoples', "v")
 
 </script>
 
